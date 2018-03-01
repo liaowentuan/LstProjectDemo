@@ -2,8 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
 import home from '@/components/home'
-import detail from '@/components/detail'
-import main from '@/components/main'
+import realTime from '@/components/realTime'
+import statistics from '@/components/statistics'
+import personnel from '@/components/personnel'
+import auditing from '@/components/auditing'
+import traffic from '@/components/traffic'
+import release from '@/components/release'
+import sysModule from '@/components/sysModule'
 
 Vue.use(Router)
 
@@ -13,19 +18,38 @@ let routes = [
     name: 'login',
     component: login
   },
-  // { path: '', redirect: '/home' },
   {
     path: '/home',
     component: home,
-    redirect: '/home/detail',
+    redirect: '/home/realTime',
     children: [
       {
-        path: '/home/detail',
-        component: detail
+        path: '/home/realTime',
+        component: realTime
       },
       {
-        path: '/home/main',
-        component: main
+        path: '/home/traffic',
+        component: traffic
+      },
+      {
+        path: '/home/statistics',
+        component: statistics
+      },
+      {
+        path: '/home/personnel',
+        component: personnel
+      },
+      {
+        path: '/home/auditing',
+        component: auditing
+      },
+      {
+        path: '/home/release',
+        component: release
+      },
+      {
+        path: '/home/sysModule',
+        component: sysModule
       }
     ]
   }

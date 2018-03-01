@@ -1,26 +1,29 @@
 <template>
   <div class="login">
-    <el-row>
-      <el-col :span="3" class="nav">
+    <nav>
         <ul>
-          <li><img src="" alt="没有logo"></li>
-          <li><router-link to="detail">detail</router-link></li>
-          <li><router-link to="main">main</router-link></li>
+          <li class="logo"><img src="" alt="没有logo"></li>
+          <li><router-link to="realTime"><i class="el-icon-date"></i><br><span>实时预览</span></router-link></li>
+          <li><router-link to="traffic"><i class="el-icon-date"></i><br><span>通行统计</span></router-link></li>
+          <li><router-link to="statistics"><i class="el-icon-date"></i><br><span>统计数据</span></router-link></li>
+          <li><router-link to="personnel"><i class="el-icon-date"></i><br><span>人员管理</span></router-link></li>
+          <li><router-link to="auditing"><i class="el-icon-date"></i><br><span>审核管理</span></router-link></li>
+          <li><router-link to="release"><i class="el-icon-date"></i><br><span>放行管理</span></router-link></li>
+          <li><router-link to="sysModule"><i class="el-icon-date"></i><br><span>系统管理</span></router-link></li>
         </ul>
-      </el-col>
-      <el-col :span="21">
-        <el-row>
-          <el-col :span="4" :offset="20">
-            <el-row>
-              <el-col :span="8"><el-button icon="el-icon-circle-check-outline"></el-button></el-col>
-              <el-col :span="8"><el-button icon="el-icon-phone-outline"></el-button></el-col>
-              <el-col :span="8"><el-button icon="el-icon-edit-outline"></el-button></el-col>
-            </el-row>
-          </el-col>
-        </el-row>
-        <router-view/>
-      </el-col>
-    </el-row>
+    </nav>
+    <main>
+      <el-row class="title">
+        <el-col :span="4" :offset="20">
+          <el-row>
+            <el-col :span="8"><el-button icon="el-icon-circle-check-outline"></el-button></el-col>
+            <el-col :span="8"><el-button icon="el-icon-phone-outline"></el-button></el-col>
+            <el-col :span="8"><el-button icon="el-icon-edit-outline"></el-button></el-col>
+          </el-row>
+        </el-col>
+      </el-row>
+      <router-view/>
+    </main>
   </div>
 </template>
 
@@ -39,12 +42,34 @@ export default {
 
 <style scoped lang="less">
 .login{
-  ul{
-    list-style: none;
-  }
-  .nav{
+  nav{
+    position: fixed;
     height: 100%;
-    border-right: 1px solid #666;
+    width: 200px;
+    box-sizing: border-box;
+    background: #616C88;
+    .router-link-active{
+      background: #424A60;
+      width: 100%;
+    }
+    a{
+      text-decoration: none;
+      color:#fff;
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px 0;
+    }
+    .logo{
+      height: 70px;
+    }
+  }
+  main{
+    margin-left:200px;
+  }
+  .title{
+    padding: 15px 0;
+    border-bottom: 5px solid #f2f2f2;
   }
 }
 </style>

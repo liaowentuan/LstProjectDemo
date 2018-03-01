@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: 'detail',
+  name: 'realTime',
   data () {
     return {
-      msg: 'detail'
+      msg: 'realTime'
     }
   }
 }
