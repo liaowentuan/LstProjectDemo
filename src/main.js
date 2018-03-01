@@ -6,8 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import App from './App'
-import Vuex from 'vuex'
-
+import store from './store/store'
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
@@ -27,7 +26,6 @@ axios.interceptors.response.use(function (response) {
 })
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
-Vue.use(Vuex)
 
 /* new Vue({
   el: '#app',
@@ -40,6 +38,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
