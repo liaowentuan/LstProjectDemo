@@ -53,6 +53,9 @@ export default {
     count () {
       return this.$store.state.count
     }
+  },
+  destroyed () {
+    this.$store.commit('setcrement')
   }
 }
 </script>
