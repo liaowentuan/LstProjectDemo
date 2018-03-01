@@ -3,13 +3,13 @@
     <nav>
         <ul>
           <li class="logo"><img src="" alt="没有logo"></li>
-          <li><router-link to="realTime"><i class="el-icon-date"></i><br><span>实时预览</span></router-link></li>
-          <li><router-link to="traffic"><i class="el-icon-date"></i><br><span>通行统计</span></router-link></li>
-          <li><router-link to="statistics"><i class="el-icon-date"></i><br><span>统计数据</span></router-link></li>
-          <li><router-link to="personnel"><i class="el-icon-date"></i><br><span>人员管理</span></router-link></li>
-          <li><router-link to="auditing"><i class="el-icon-date"></i><br><span>审核管理</span></router-link></li>
-          <li><router-link to="release"><i class="el-icon-date"></i><br><span>放行管理</span></router-link></li>
-          <li><router-link to="sysModule"><i class="el-icon-date"></i><br><span>系统管理</span></router-link></li>
+          <li><router-link to="/home/realTime"><i class="el-icon-view"></i><br><span>实时预览</span></router-link></li>
+          <li><router-link to="/home/traffic"><i class="el-icon-sort"></i><br><span>通行统计</span></router-link></li>
+          <li><router-link to="/home/statistics"><i class="el-icon-date"></i><br><span>统计数据</span></router-link></li>
+          <li><router-link to="/home/personnel"><i class="el-icon-printer"></i><br><span>人员管理</span></router-link></li>
+          <li><router-link to="/home/auditing"><i class="el-icon-edit-outline"></i><br><span>审核管理</span></router-link></li>
+          <li><router-link to="/home/release"><i class="el-icon-edit"></i><br><span>放行管理</span></router-link></li>
+          <li><router-link to="/home/sysModule"><i class="el-icon-setting"></i><br><span>系统管理</span></router-link></li>
         </ul>
     </nav>
     <main>
@@ -59,6 +59,9 @@ export default {
       text-align: center;
       margin: 20px 0;
       padding: 10px 0;
+      i{
+        font-size: 40px;
+      }
     }
     .logo{
       height: 70px;

@@ -7,7 +7,14 @@ import statistics from '@/components/statistics'
 import personnel from '@/components/personnel'
 import auditing from '@/components/auditing'
 import traffic from '@/components/traffic'
-import release from '@/components/release'
+
+// 放行管理
+import release from '@/components/release/release'
+import first from '@/components/release/first'
+import second from '@/components/release/second'
+import third from '@/components/release/third'
+
+// 系统管理
 import sysModule from '@/components/sysModule'
 
 Vue.use(Router)
@@ -45,7 +52,22 @@ let routes = [
       },
       {
         path: '/home/release',
-        component: release
+        component: release,
+        redirect: '/home/release/first',
+        children: [
+          {
+            path: '/home/release/first',
+            component: first
+          },
+          {
+            path: '/home/release/second',
+            component: second
+          },
+          {
+            path: '/home/release/third',
+            component: third
+          }
+        ]
       },
       {
         path: '/home/sysModule',

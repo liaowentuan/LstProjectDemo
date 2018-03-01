@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: 'release',
+  name: 'second',
   data () {
     return {
-      msg: 'this is release'
+      msg: 'this is second'
     }
   }
 }
