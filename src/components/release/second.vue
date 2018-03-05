@@ -9,7 +9,8 @@
         </el-col>
       </el-row>
     </el-form>
-    <el-table :data="dataList.data" border max-height="500" style="width: 100%" highlight-current-row @current-change="handleCurrentRowsChange">
+    <div class="table-page">
+      <el-table :data="dataList.data" border max-height="500" style="width: 100%" highlight-current-row @current-change="handleCurrentRowsChange"> <!--current-change 选中行时间-->
       <el-table-column type="index" width="50"></el-table-column>
       <el-table-column prop="extlib_desc" label="描述" width="180"></el-table-column>
       <el-table-column prop="extlib_id" label="id" width="300"></el-table-column>
@@ -22,6 +23,8 @@
       </el-table-column>
     </el-table>
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total"></el-pagination>
+      <!--size-change长度改变时间  current-change页面改变事件-->
+    </div>
   </div>
 </template>
 
@@ -50,7 +53,7 @@ export default {
     getData (page, size) {
       this.$http({
         method: 'GET',
-        url: '/controller/extlibs?extlib_name=&page=' + page + '&pagesize=' + size
+        url: '/controller/extlibs?page=' + page + '&pagesize=' + size
       }).then((res) => {
         this.dataList.data = res.data.extlibrarys
         this.total = res.data.count
@@ -71,6 +74,12 @@ export default {
     },
     handleCurrentRowsChange (val) {
       this.currentRow = val
+    },
+    handleEdit (index, row) {
+      console.log(index, row)
+    },
+    handleDelete (index, row) {
+      console.log(index, row)
     }
   },
   mounted: function () {

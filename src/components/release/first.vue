@@ -39,6 +39,31 @@ export default {
       return this.$store.state.count
     }
   },
+  beforeCreate () {
+    console.log('beforeCreate')
+  },
+  created () {
+    console.log('created')
+  },
+  beforeMount () {
+    console.log('beforeMount')
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      console.log('mounted')
+    })
+  },
+  beforeUpdate () {
+    console.log('beforeUpdate')
+  },
+  updated: function () {
+    this.$nextTick(function () {
+      console.log('updated')
+    })
+  },
+  beforeDestroy () {
+    console.log('beforeDestroy')
+  },
   destroyed () {
     this.$store.commit('setcrement')
   }
@@ -46,5 +71,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

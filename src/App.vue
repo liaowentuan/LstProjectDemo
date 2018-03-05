@@ -18,4 +18,7 @@ export default {
     padding: 0;
     margin: 0;
   }
+  .table-page{
+    margin: 10px;
+  }
 </style>
