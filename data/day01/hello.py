@@ -2,4 +2,4 @@
 print("hello world")
 name = "liaowentuan"
 PI = 3.1415926535
-print(name)
+print(name, name, PI)

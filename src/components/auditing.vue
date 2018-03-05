@@ -1,5 +1,8 @@
 <template>
-  <div :class="className" :id="id" :style="{height:height,width:width}" ref="myEchart">
+  <div>
+    <div :class="className" :id="id" :style="{height:height,width:width}" style="float:left" ref="myEchart">
+    </div>
+    <div :style="{height:height,width:width}" style="float:left" ref="myEcharts"></div>
   </div>
 </template>
 <script>
@@ -39,6 +42,14 @@ export default {
     this.chart.dispose()
     this.chart = null
   },
+  beforeRouteLeave (to, from, next) {
+    const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
+    if (answer) {
+      next()
+    } else {
+      next(false)
+    }
+  },
   methods: {
     initChart () {
       // console.log(this.$refs.myEchart) 获取元素
@@ -60,7 +71,7 @@ export default {
         },
         xAxis: [{
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'],
           axisTick: {
             alignWithLabel: true
           }
@@ -73,6 +84,21 @@ export default {
           type: 'bar',
           barWidth: '60%',
           data: [10, 52, 200, 334, 390, 330, 220]
+        }]
+      })
+      this.chart = this.echarts.init(this.$refs.myEcharts)
+      this.chart.setOption({
+        xAxis: {
+          type: 'category',
+          data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line',
+          smooth: true
         }]
       })
     }
