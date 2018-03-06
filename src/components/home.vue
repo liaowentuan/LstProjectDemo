@@ -57,7 +57,7 @@ export default {
       color:#fff;
       display: block;
       text-align: center;
-      margin: 20px 0;
+      margin: 15px 0;
       padding: 10px 0;
       i{
         font-size: 40px;
