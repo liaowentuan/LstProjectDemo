@@ -2,11 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
 import home from '@/components/home'
-import realTime from '@/components/realTime'
-import statistics from '@/components/statistics'
-import personnel from '@/components/personnel'
-import auditing from '@/components/auditing'
+
+// 实时预览
+import realTime from '@/components/realTime/realTime'
+
+// 通行记录
 import traffic from '@/components/traffic'
+
+// 统计数据
+import statistics from '@/components/statistics'
+
+// 人员管理
+import personnel from '@/components/personnel'
+
+// 审核管理
+import auditing from '@/components/auditing'
 
 // 放行管理
 import release from '@/components/release/release'
