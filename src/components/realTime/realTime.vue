@@ -12,17 +12,40 @@
           <div class="playBody">
             <div v-if="playCount == 1">
               <div>
-                {{currentRow[0].stream}}
+                <object style="width: 100%;height: 540px" type='application/x-vlc-plugin' ref='vlc' events='True' pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+                  <!--<param name='mrl' value='{{camera.stream}}' id="vlc_mrl"/>-->
+                  <param name="autoplay" value="true" />
+                </object>
               </div>
             </div>
             <div v-if="playCount == 4" class="playerGroup">
               <el-row>
-                <el-col :span="12" class="playerGroupItem">{{currentRow[0].stream}}</el-col>
-                <el-col :span="12" class="playerGroupItem">2</el-col>
+                <el-col :span="12" class="playerGroupItem">
+                  <object style="width: 100%;height: 270px" type='application/x-vlc-plugin' ref='vlc1' events='True' pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+                    <!--<param name='mrl' value='{{camera.stream}}' id="vlc_mrl"/>-->
+                    <param name="autoplay" value="true" />
+                  </object>
+                </el-col>
+                <el-col :span="12" class="playerGroupItem">
+                  <object style="width: 100%;height: 270px" type='application/x-vlc-plugin' ref='vlc2' events='True' pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+                    <!--<param name='mrl' value='{{camera.stream}}' id="vlc_mrl"/>-->
+                    <param name="autoplay" value="true" />
+                  </object>
+                </el-col>
               </el-row>
               <el-row>
-                <el-col :span="12" class="playerGroupItem">3</el-col>
-                <el-col :span="12" class="playerGroupItem">4</el-col>
+                <el-col :span="12" class="playerGroupItem">
+                  <object style="width: 100%;height: 270px" type='application/x-vlc-plugin' ref='vlc3' events='True' pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+                    <!--<param name='mrl' value='{{camera.stream}}' id="vlc_mrl"/>-->
+                    <param name="autoplay" value="true" />
+                  </object>
+                </el-col>
+                <el-col :span="12" class="playerGroupItem">
+                  <object style="width: 100%;height: 270px" type='application/x-vlc-plugin' ref='vlc4' events='True' pluginspage="http://www.videolan.org" codebase="http://downloads.videolan.org/pub/videolan/vlc-webplugins/2.0.6/npapi-vlc-2.0.6.tar.xz">
+                    <!--<param name='mrl' value='{{camera.stream}}' id="vlc_mrl"/>-->
+                    <param name="autoplay" value="true" />
+                  </object>
+                </el-col>
               </el-row>
             </div>
           </div>
@@ -44,6 +67,31 @@
 </template>
 
 <script>
+/* eslint-disable */
+/**
+  　　┏┓　　　┏┓+ +
+  　┏┛┻━━━┛┻┓ + +
+  　┃　　　　　　　┃ 　
+  　┃　　　━　　　┃ ++ + + +
+   ████━████ ┃+
+  　┃　　　　　　　┃ +
+  　┃　　　┻　　　┃
+  　┃　　　　　　　┃ + +
+  　┗━┓　　　┏━┛
+  　　　┃　　　┃　　　　　　　　　　　
+  　　　┃　　　┃ + + + +
+  　　　┃　　　┃
+  　　　┃　　　┃ +  神兽保佑
+  　　　┃　　　┃    代码无bug　　
+  　　　┃　　　┃　　+　　　　　　　　　
+  　　　┃　 　　┗━━━┓ + +
+  　　　┃ 　　　　　　　┣┓
+  　　　┃ 　　　　　　　┏┛
+  　　　┗┓┓┏━┳┓┏┛ + + + +
+  　　　　┃┫┫　┃┫┫
+  　　　　┗┻┛　┗┻┛+ + + +
+ */
+/* eslint-enable */
 export default {
   name: 'realTime',
   data () {
@@ -58,7 +106,7 @@ export default {
       input: '',
       currentRow: [
         {
-          stream: 1
+          stream: ''
         },
         {
           stream: ''
@@ -78,6 +126,7 @@ export default {
   }, //
   mounted: function () {
     this.$nextTick(function () {
+      this.setPlayerStatus()
       this.$http({
         method: 'GET',
         url: '/controller/cameras/cameraNames'
@@ -97,25 +146,68 @@ export default {
         this.cameraList.data = this.cameraListCopy.data.filter(this.createFilter(queryString))
       }
     },
+    updatePlayerStatus () {
+      this.$store.commit('updatePlayerStatus')
+    },
+    setPlayerStatus () {
+      this.$store.commit('setPlayerStatus')
+    },
     createFilter (queryString) {
       return (restaurant) => {
         return (restaurant.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
       }
     },
+    initPlayer (playerDom) {
+      playerDom.style.display = 'none'
+      playerDom.style.display = 'block'
+      playerDom.playlist.stop()
+      playerDom.playlist.items.clear()
+    },
+    runPlayer (playerDom, stream) {
+      let itemId = playerDom.playlist.add(stream, 'live', ':network-caching=350')
+      playerDom.playlist.playItem(itemId)
+    },
     handleCurrentRowsChange (val) {
       if (this.playCount === 1) {
         this.currentRow[0]['stream'] = val.stream
+        var vlc = this.$refs.vlc
+        this.initPlayer(vlc)
+        this.runPlayer(vlc, val.stream)
+        this.setPlayerStatus()
       } else {
-        if (this.currentRow.length === 1) {
+        if (this.playerStatus === 1) {
+          this.currentRow[1]['stream'] = val.stream
+          var vlc1 = this.$refs.vlc1
+          this.initPlayer(vlc1)
+          this.runPlayer(vlc1, val.stream)
+        } else if (this.playerStatus === 2) {
+          this.currentRow[2]['stream'] = val.stream
+          var vlc2 = this.$refs.vlc2
+          this.initPlayer(vlc2)
+          this.runPlayer(vlc2, val.stream)
+        } else if (this.playerStatus === 3) {
+          this.currentRow[3]['stream'] = val.stream
+          var vlc3 = this.$refs.vlc3
+          this.initPlayer(vlc3)
+          this.runPlayer(vlc3, val.stream)
+        } else if (this.playerStatus === 4) {
           this.currentRow[0]['stream'] = val.stream
-        } else if (this.currentRow.length === 2) {
-          this.currentRow[2] = val
-        } else if (this.currentRow.length === 3) {
-          this.currentRow[3] = val
-        } else if (this.currentRow.length === 4) {
-          this.currentRow[1] = val
+          var vlc4 = this.$refs.vlc4
+          this.initPlayer(vlc4)
+          this.runPlayer(vlc4, val.stream)
         }
+        this.updatePlayerStatus()
       }
+    }
+  },
+  updated: function () {
+    this.$nextTick(function () {
+      console.log('updated')
+    })
+  },
+  computed: {
+    playerStatus () {
+      return this.$store.state.playerStatus
     }
   }
 }
