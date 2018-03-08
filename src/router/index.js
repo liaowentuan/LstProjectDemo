@@ -31,7 +31,7 @@ Vue.use(Router)
 
 let routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: login
   },
@@ -94,7 +94,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.length === 0) {
-    from.name ? next({ name: from.name }) : next('/')
+    from.name ? next({ name: from.name }) : next('/login')
   } else {
     next()
   }
